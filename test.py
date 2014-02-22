@@ -35,3 +35,6 @@ print(fsm.current)
 # 1. 了解fsm.tmap 的构建
 # 2. 了解 e = _e_obj() 的构建
 # 3. def fn(**kwargs)的构造和返回
+
+
+# 终于，看着代码，反向写出了testcase。python也不简单。
