@@ -32,9 +32,9 @@ print(fsm.current)
 
 # 交互状态下，用 fsm.__dict__() ,查看tmap可以帮助更好的了解fsm的工作机理。
 # 代码的关键
-# 1. 了解fsm.tmap 的构建
-# 2. 了解 e = _e_obj() 的构建
-# 3. def fn(**kwargs)的构造和返回
+# 1. 了解fsm.tmap 的构建—- event -> src -> dst ,通过简单的索引 tmap[event][src],就可以获得dst。
+# 2. 了解 e = _e_obj() 的构建,目的是作为参数，传递context 给 onEVENThappen
+# 3. def fn(**kwargs)的构造和返回 。返回一个函数。
 
 
 # 终于，看着代码，反向写出了testcase。python也不简单。
