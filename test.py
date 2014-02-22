@@ -1,5 +1,11 @@
+# -*- coding: utf-8 -*-
 from fysom import Fysom
 
+def oneat(e):
+  print("e:")
+  print(e.src)
+  print(e.dst)
+  print(e.keyparameter)
 fsm = Fysom({
   'initial': 'hungry',
   'events': [
@@ -8,15 +14,24 @@ fsm = Fysom({
     {'name': 'eat',  'src': 'full',      'dst': 'sick'},
     {'name': 'rest', 'src': ['hungry', 'satisfied', 'full', 'sick'],
                                          'dst': 'hungry'}
-  ]
+  ],
+  'callbacks': {
+    'oneat':  oneat
+  }
 })
 #
+# print(fsm.current)
+fsm.eat(keyparameter=1)
 print(fsm.current)
-fsm.eat()
-print(fsm.current)
-fsm.eat()
-print(fsm.current)
-fsm.eat()
-print(fsm.current)
-fsm.rest()
-print(fsm.current)
+# fsm.eat()
+# print(fsm.current)
+# fsm.eat()
+# print(fsm.current)
+# fsm.rest()
+# print(fsm.current)
+
+# 交互状态下，用 fsm.__dict__() ,查看tmap可以帮助更好的了解fsm的工作机理。
+# 代码的关键
+# 1. 了解fsm.tmap 的构建
+# 2. 了解 e = _e_obj() 的构建
+# 3. def fn(**kwargs)的构造和返回

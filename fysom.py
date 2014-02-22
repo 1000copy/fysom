@@ -301,8 +301,10 @@ class Fysom(object):
 
     for e in events:
       add(e)
-
+    # print("tmap:")
+    # print(tmap)
     for name in tmap:
+      # print("name:"+name)
       setattr(self, name, self._build_event(name))
 
     for name in callbacks:
@@ -326,14 +328,20 @@ class Fysom(object):
 
       src = self.current
       dst = self._map[event][src]
-
+      # event method 's paramter object
       class _e_obj(object):
         pass
       e = _e_obj()
       e.fsm, e.event, e.src, e.dst = self, event, src, dst
+      # print ("kwargs")
+      # print (kwargs)
       for k in kwargs:
         setattr(e, k, kwargs[k])
+        # print ("e.key")
+        # print (e.key)  
 
+      
+      
       if self.current != dst:
         if self._before_event(e) == False:
           return
