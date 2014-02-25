@@ -23,6 +23,23 @@ fsm = Fysom({
 # print(fsm.current)
 fsm.eat(keyparameter=1)
 print(fsm.current)
+# kwargs testcase
+def foo(**kwargs):
+  print("foo:kwargs")
+  print kwargs
+foo(key1=1,key2="2")
+# setattr for new function inject  testcase
+print("setattr for new function inject  testcase")
+class foo_c:
+  def __init__(self):
+    setattr(self,"inject_fun",self.build_fun())
+  def build_fun(self):
+    def foo(**kwargs):
+      print("into foo for build_fun")
+      print kwargs
+    return foo
+foofoo = foo_c()
+foofoo.inject_fun(key=1,key2=2)
 # fsm.eat()
 # print(fsm.current)
 # fsm.eat()
@@ -38,3 +55,23 @@ print(fsm.current)
 
 
 # 终于，看着代码，反向写出了testcase。python也不简单。
+import unittest
+class t(unittest.TestCase):
+  def setUp(self):
+    pass
+  def tearDown(self):
+    pass
+  def test_1(self):
+    self.assertEqual(1,1)
+
+class t1(unittest.TestCase):
+  def setUp(self):
+    pass
+  def tearDown(self):
+    pass
+  def test_1(self):
+    self.assertEqual(1,1)
+
+
+if __name__=="__main__":
+  unittest.main()
